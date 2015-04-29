@@ -211,8 +211,8 @@ public class Network {
 
             dos = new DataOutputStream(
                     conn.getOutputStream());
-            //dos.writeBytes(Newline);
-            //dos.writeBytes(Newline);
+            dos.writeBytes(Newline);
+            dos.writeBytes(Newline);
 
 
         } catch (Exception e) {
