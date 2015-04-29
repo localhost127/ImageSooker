@@ -193,6 +193,7 @@ public class uploader extends Activity {
 
                 if (statusCode == 200) {
                     result = "Something went sideways :(";
+
 //					SharedPreferences.Editor edit1 = settings.edit();
 //					edit1.clear();
 //					edit1.commit();

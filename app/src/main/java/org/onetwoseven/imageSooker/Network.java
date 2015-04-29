@@ -2,6 +2,9 @@ package org.onetwoseven.imageSooker;
 
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.net.CookieHandler;
+import java.net.CookieStore;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -13,6 +16,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import android.content.Context;
+import java.net.CookieManager;
 
 
 public class Network {
@@ -195,9 +199,30 @@ public class Network {
 
 //			CookieManager cookieManager = CookieManager.getInstance();
 //			String cookie = cookieManager.getCookie(conn.getURL().toString());
+
+            //This deletes cookies erroneously stored (and then concatenated against the spec, with a comma)
+            CookieStore cookieStore = ((java.net.CookieManager)CookieHandler.getDefault()).getCookieStore();
+            List<HttpCookie> cookies = cookieStore.getCookies();
+            cookieStore.removeAll();
+
+
+            //Prints cookies
+            /*for (HttpCookie cookie3 : cookies) {
+                String setCookie = new StringBuilder(cookie3.toString())
+                        .append("; domain=").append(cookie3.getDomain())
+                        .append("; path=").append(cookie3.getPath())
+                        .toString();
+                Log.v(this.getClass().getName(), "Sending java.net.CookieManager cookie: " + setCookie);
+                //webCookieManager.setCookie(url, setCookie);
+            }*/
+
+
+
             String cookie = settings.getString("session", null);
             if (cookie != null) {
+
                 Log.v(this.getClass().getName(), "Sending cookie: " + cookie);
+
                 conn.setRequestProperty("Cookie", cookie);
             }
 
