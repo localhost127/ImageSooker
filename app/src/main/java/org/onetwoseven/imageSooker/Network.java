@@ -21,9 +21,10 @@ import java.net.CookieManager;
 
 public class Network {
     public String IP = "http://img.127001.org";
+    //public String IP = "http://10.127.0.1:5001";
     private String Boundary = "----xxxRRRFFFfffxxx----";
     private String Newline = "\r\n";
-    private int Buffsize = 10240;
+    private int Buffsize = 1024;
 
     private HttpURLConnection conn;
     private Context context;
@@ -181,6 +182,8 @@ public class Network {
 
         } catch (Exception e) {
             return uploadInstance.new uploadResults(0, "");
+        } finally{
+            conn.disconnect();
         }
 
 

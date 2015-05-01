@@ -144,7 +144,8 @@ public class uploader extends Activity {
         protected String[] doInBackground(Object... data) {
             boolean lastPass = (Boolean) data[0];
             Uri myUri = (Uri) data[1];
-
+            Log.v(this.getClass().getName(),
+                    "myUri.getpath: " + myUri.getPath());
             String result = "";
             String imageUrl = "";
 
@@ -169,6 +170,9 @@ public class uploader extends Activity {
                     } finally {
                         mc.close();
                     }
+                }else{
+                    name = myUri.getPath();
+
                 }
                 String myCaption = null;
                 if (data.length > 2) {
